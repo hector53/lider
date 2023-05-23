@@ -120,7 +120,7 @@ class Lider
     {
         error_log('entrando a la funcion show page liderpay:  ' . get_query_var('pagename') . 'ahora token:' . get_query_var('token'));
         if (get_query_var('pagename') === 'pay' && get_query_var('token')) {
-            
+
 
             $token = get_query_var('token');
             //quiero verificar si el token existe aqui y en lider 
