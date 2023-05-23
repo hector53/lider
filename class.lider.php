@@ -219,16 +219,17 @@ class Lider
                 'token_url' => $token,
             )),
         );
-        error_log("url send post :".$url);
-        error_log("token_domain :".$token_domain);
-        error_log("args :".json_encode($args));
+       // error_log("url send post :".$url);
+        //error_log("token_domain :".$token_domain);
+        //error_log("args :".json_encode($args));
+
         $response = wp_remote_post($url . "/payment-token/get", $args);
         if (is_wp_error($response)) {
             $error_message = $response->get_error_message();
             error_log("Se produjo un error: $error_message");
             return null;
         } else {
-            error_log("response:".json_encode($response));
+           // error_log("response:".json_encode($response));
             // La solicitud se realizó con éxito
             return $response;
         }
