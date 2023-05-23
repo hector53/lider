@@ -225,7 +225,7 @@ class Lider
             error_log("Se produjo un error: $error_message");
             return null;
         } else {
-            error_log("response: $response");
+            error_log("response:".json_encode($response));
             // La solicitud se realizó con éxito
             return $response;
         }
