@@ -219,6 +219,9 @@ class Lider
                 'token_url' => $token,
             )),
         );
+        error_log("url send post :".$url);
+        error_log("token_domain :".$token_domain);
+        error_log("args :".json_encode($args));
         $response = wp_remote_post($url . "/payment-token/get", $args);
         if (is_wp_error($response)) {
             $error_message = $response->get_error_message();
