@@ -13,7 +13,7 @@ License: GPL2
 // Definir constantes para la clave de licencia y la URL de la API
 
 define( 'LIDER__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-
+define('LIDER_PLUGIN_URL',plugins_url('', __FILE__));
 register_activation_hook( __FILE__, array( 'Lider', 'plugin_activation' ) );
 register_deactivation_hook( __FILE__, array( 'Lider', 'plugin_deactivation' ) );
 require_once( LIDER__PLUGIN_DIR . 'class.lider.php' );

@@ -20,6 +20,7 @@ $templateHtml = $decodeBody->template;
   <title>Checkout</title>
   <!-- Incluimos Handlebars con un CDN -->
   <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
   <style>
@@ -69,6 +70,7 @@ $templateHtml = $decodeBody->template;
     });
     const template = Handlebars.compile(source);
     const data = <?php echo $response_body; ?>;
+    console.log("data", data)
     const htmlHandle = template(data);
     const app = Vue.createApp({
       data() {
@@ -81,10 +83,53 @@ $templateHtml = $decodeBody->template;
           html: htmlHandle
         }
       },
+      methods: {
+        set_loader(val){
+          const coverSpin = document.getElementById("cover-spin");  
+          
+          if(val==0){
+            coverSpin.style.display = "none";
+          }
+
+          if(val==1){
+            coverSpin.style.display = "block";
+          }
+
+        },
+        async clickProcessor(e) {
+          console.log("e",e.target.dataset )
+          const identy = e.target.dataset.identy
+          const id = e.target.dataset.id
+          console.log("clic al boton", id)
+          this.set_loader(1)
+          try {
+              const result = await axios.post("<?php echo get_site_url()."/wp-json/lider/v1/select_payment"; ?>",{
+            token: "<?php echo $token; ?>", 
+            identy: identy, 
+            id_processor: id
+          })
+          console.log("result", result)
+          location.href = result.data.url
+          //this.set_loader(0)
+          } catch (error) {
+            console.log("error", error)
+            this.set_loader(0)
+          }
+
+
+        }
+      },
       mounted() {
-   //     console.log("entrando a mounted", this.html)
+        
+        //     console.log("entrando a mounted", this.html)
         //  const miParrafo = document.getElementById('miTemplate');
         //   miParrafo.textContent = 'Este es el nuevo texto del párrafo.';
+        const items = document.querySelectorAll('.processor_item')
+        console.log("items", items)
+        items.forEach(item => {
+          item.addEventListener('click', this.clickProcessor)
+        })
+
         this.loader = false
       }
     })
