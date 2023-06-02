@@ -12,6 +12,7 @@ License: GPL2
 // Aquí va el código de tu plugin.
 // Definir constantes para la clave de licencia y la URL de la API
 
+
 define( 'LIDER__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define('LIDER_PLUGIN_URL',plugins_url('', __FILE__));
 register_activation_hook( __FILE__, array( 'Lider', 'plugin_activation' ) );

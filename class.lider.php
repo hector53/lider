@@ -122,6 +122,7 @@ class Lider
             wp_send_json_error('error update token lider', 404);
         }
 
+        
         #ahora si podemos actualizar los datos en db y en lider 
         $table_name = $wpdb->prefix . 'payment_token';
         $wpdb->update(

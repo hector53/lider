@@ -9,6 +9,7 @@ $response_body = wp_remote_retrieve_body($search_token_lider);
 $decodeBody = json_decode($response_body);
 $templateHtml = $decodeBody->template;
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
